@@ -1,0 +1,8 @@
+MANIFEST
+CHANGELOG
+README
+Makefile.PL
+lib/Class/ExtraAttributes.pm
+t/001basic.t
+t/010simple.t
+META.yml                                 Module meta-data (added by MakeMaker)

@@ -6,7 +6,7 @@ functionality of that class.  This functionality is based on the OOB class
 which allows attributes to be added to any Perl data-structure.
 
 Version:
- 0.01
+ 0.02
 
 Required Modules:
  OOB (0.08)

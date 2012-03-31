@@ -1,11 +1,11 @@
 package Class::ExtraAttributes;
 
+# version
+$VERSION= '0.02';
+
 # be as strict and verbose as possible
 use strict;
 use warnings;
-
-# version
-$Class::ExtraAttributes::VERSION = '0.01';
 
 # modules that we need
 use OOB qw( OOB_get OOB_set );
@@ -32,7 +32,7 @@ my %attributes;
 sub attributes {
 
     # fetch attributes
-    my @attributes = keys %{ $attributes{ $_[1] || caller() } || {} };
+    my @attributes= keys %{ $attributes{ $_[1] || caller() } || {} };
 
     return wantarray ? @attributes : \@attributes;
 }    #attributes
@@ -50,14 +50,14 @@ sub attributes {
 #      2..N attributes to be defined
 
 sub import {
-    my $class = shift;
+    my $class= shift;
 
     # nothing to export
     return if !@_;
 
     # determine namespace to export to
-    my $namespace  = caller();
-    my $attributes = $attributes{$namespace} ||= {};
+    my $namespace=  caller();
+    my $attributes= $attributes{$namespace} ||= {};
 
     # create accessor / mutator for given attributes
     no strict 'refs';
@@ -68,8 +68,8 @@ sub import {
           if $namespace->can($method);
 
         # install accessor / mutator
-        $attributes->{$method} = undef;
-        *{ $namespace . '::' . $method } = sub {
+        $attributes->{$method}= undef;
+        *{ $namespace . '::' . $method }= sub {
             return @_ == 2
              ? OOB_set( $_[0], $method => $_[1], $namespace )
              : OOB_get( $_[0], $method, $namespace );
@@ -89,7 +89,7 @@ Class::ExtraAttributes - extra attributes for a class
 
 =head1 VERSION
 
-This documentation describes version 0.01.
+This documentation describes version 0.02.
 
 =head1 SYNOPSIS
 
@@ -103,18 +103,18 @@ This documentation describes version 0.01.
  my $value = $object->foo;
 
  sub update {  # in case you want persistence for extra attributes
-     my $object = shift;
+     my $object= shift;
      $object->SUPER::update(@_);
 
-     my @extra = Class::ExtraAttributes->attributes;
+     my @extra= Class::ExtraAttributes->attributes;
      # perform update for extra attributes
  }
 
  sub retrieve {  # in case you have persistence of extra attributes
-     my $class = shift;
+     my $class= shift;
      $class->SUPER::retrieve(@_);
 
-     my @extra = Class::ExtraAttributes->attributes;
+     my @extra= Class::ExtraAttributes->attributes;
      # perform retrieve of extra attributes
  }
 
@@ -131,9 +131,9 @@ functionality of that class.  This functionality is based on the L<OOB> class
 which allows attributes to be added to any Perl data-structure.
 
 Of course, this only applies to extra attributes on instantiated objects.
-If there is a persisten backend for the class ( as there e.g. is with
+If there is a persistent backend for the class ( as there e.g. is with
 L<Class::DBI> or L<DBIx::Class> ), then you will have to provide your own
-persistence update and retrieve to the class.
+persistence "update" and "retrieve" to the class.
 
 =head1 THEORY OF OPERATION
 
@@ -168,7 +168,7 @@ Please report bugs to <perlbugs@dijkmat.nl>.
 
 =head1 COPYRIGHT
 
-Copyright (c) 2008 Elizabeth Mattijsen <liz@dijkmat.nl>. All rights
+Copyright (c) 2008, 2012 Elizabeth Mattijsen <liz@dijkmat.nl>. All rights
 reserved.  This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
 
